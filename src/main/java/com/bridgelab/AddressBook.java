@@ -155,7 +155,7 @@ public class AddressBook {
         System.out.println("Enter number of new persons to be added: ");
         int noOfPersons = sc.nextInt();
         int count = 1;
-        while(count <= noOfPersons) {
+        while (count <= noOfPersons) {
             addContact(addressBookName);
             count++;
         }
@@ -167,7 +167,7 @@ public class AddressBook {
     public void searchByCity() {
         System.out.println("Enter city name: ");
         String City = sc.next();
-        list.stream().filter(n -> n.getCity().equals(City)).forEach(i -> System.out.println("Details found: "+i.getFirstName()));
+        list.stream().filter(n -> n.getCity().equals(City)).forEach(i -> System.out.println("Details found: " + i.getFirstName()));
     }
 
     /*
@@ -212,8 +212,8 @@ public class AddressBook {
     public static void addDataToFile(String addressBookName) {
         System.out.println("Enter name of text file to write data: ");
         String fileName = sc.next();
-        File file = new File("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab"+fileName+".txt");
-        if(!file.exists()) {
+        File file = new File("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab" + fileName + ".txt");
+        if (!file.exists()) {
             try {
                 file.createNewFile();
             } catch (IOException e) {
@@ -224,13 +224,13 @@ public class AddressBook {
             FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
             BufferedWriter bw = new BufferedWriter(fw);
             List<String[]> stringData = new ArrayList<>();
-            for(Person detail : list) {
-                stringData.add(new String[] { "Person: "+" \n1. FirstName: "+firstName+" \n2. LastName: "+lastName+"\n3. Address: "+address
-                        +"\n4. City: "+city+"\n5. State: "+state+"\n6. Zip: "+zip+"\n7. PhoneNumber: "+phno
-                        +"\n 8. Email: "+emailId+"\n" });
+            for (Person detail : list) {
+                stringData.add(new String[]{"Person: " + " \n1. FirstName: " + firstName + " \n2. LastName: " + lastName + "\n3. Address: " + address
+                        + "\n4. City: " + city + "\n5. State: " + state + "\n6. Zip: " + zip + "\n7. PhoneNumber: " + phno
+                        + "\n 8. Email: " + emailId + "\n"});
                 bw.writeAll(stringData);
                 bw.close();
-            } catch (IOException e) {
+            } catch(IOException e){
                 e.printStackTrace();
             }
         }
@@ -238,10 +238,10 @@ public class AddressBook {
         /*
         Read from input file
          */
-        public void readDataFromFile() {
+        public void readDataFromFile () {
             System.out.println("Enter Address Book Name: ");
             String fileName = sc.next();
-            Path filePath = Paths.get("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab"+fileName+".txt");
+            Path filePath = Paths.get("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab" + fileName + ".txt");
             try {
                 Files.lines(filePath).map(line -> line.trim()).forEach(line -> System.out.println(line));
             } catch (IOException e) {
@@ -252,21 +252,21 @@ public class AddressBook {
         /*
         adding data to csv file
          */
-        public static void addDataToCSVFile(String addressBookName) throws IOException {
+        public static void addDataToCSVFile (String addressBookName) throws IOException {
             System.out.println("Enter name of CSV file to write data: ");
             String fileName = sc.next();
-            Path filePath = Paths.get("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab"+fileName+".csv");
-            if(Files.notExists(filePath))
+            Path filePath = Paths.get("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab" + fileName + ".csv");
+            if (Files.notExists(filePath))
                 Files.createFile(filePath);
             File file = new File(String.valueOf(filePath));
             try {
                 FileWriter fw = new FileWriter(file, true);
                 CSVWriter writer = new CSVWriter(fw);
                 List<String[]> data = new ArrayList<>();
-                for(Person details : list) {
-                    data.add(new String[] { "Person: "+"\n1. FirstName: "+details.firstName+"\n2. LastName: "
-                            +details.lastName+"\n3. Address: "+details.address+"\n4. City: "+details.city+"\n5. State: "
-                            +details.state+"\n6. Zip: "+details.zip+"\n7. PhoneNumber: "+details.phno+"\n8. Email: "+details.emailId+"\n"
+                for (Person details : list) {
+                    data.add(new String[]{"Person: " + "\n1. FirstName: " + details.firstName + "\n2. LastName: "
+                            + details.lastName + "\n3. Address: " + details.address + "\n4. City: " + details.city + "\n5. State: "
+                            + details.state + "\n6. Zip: " + details.zip + "\n7. PhoneNumber: " + details.phno + "\n8. Email: " + details.emailId + "\n"
                     });
                 }
                 writer.writeAll(data);
@@ -279,15 +279,15 @@ public class AddressBook {
         /*
         Reading data from csv file
          */
-        public void readDataFromCSVFile() {
+        public void readDataFromCSVFile () {
             System.out.println("Enter Address Book Name: ");
             String fileName = sc.next();
             CSVreader reader = null;
             try {
-                reader = new CSVReader(new FileReader("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab"+fileName+".csv"));
+                reader = new CSVReader(new FileReader("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab" + fileName + ".csv"));
                 String[] nextLine;
-                while((nextLine = reader.readNext() != null)) {
-                    for(String next : nextLine) {
+                while ((nextLine = reader.readNext() != null)) {
+                    for (String next : nextLine) {
                         System.out.println(next);
                     }
                     System.out.println();
@@ -297,3 +297,41 @@ public class AddressBook {
             }
         }
     }
+
+    /*
+    Write persons contact as json file
+     */
+    public void addDataToJSONFile(String addressBookName) throws IOException {
+        System.out.println("Enter name for json written file : ");
+        String fileName = sc.nextLine();
+        Path filePath = Paths.get("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab"+fileName+".json");
+        Gson gson = new Gson();
+        String json = gson.toJson(lst);
+        FileWriter writer = new FileWriter(String.valueOf(filePath));
+        writer.write(json);
+        writer.close();
+    }
+
+    /*
+    Read contacts as json file
+     */
+    public void readDataFromJSONFile() throws FileNotFoundException {
+        System.out.println("Enter address book name : ");
+        String fileName = sc.nextLine();
+        Path filePath = Paths.get("D:\\php\\intelige\\Addressbook GRADLE\\src\\main\\java\\com\\bridgelab"+fileName+".json");
+        Gson gson = new Gson();
+        BufferedReader br = new BufferedReader(new FileReader(String.valueOf(filePath)));
+        Person[] data = gson.fromJson(br, Person[].class);
+        List<Person> lst = Arrays.asList(data);
+        for (Person details : lst) {
+            System.out.println("Firstname : " + details.firstName);
+            System.out.println("Lastname : " + details.lastName);
+            System.out.println("Address : " + details.address);
+            System.out.println("City : " + details.city);
+            System.out.println("State : " + details.state);
+            System.out.println("Zip : " + details.zip);
+            System.out.println("PhoneNumber : " + details.phno);
+            System.out.println("Email : " + details.emailId);
+        }
+    }
+}

@@ -1,0 +1,9 @@
+build/        
+data.CSV  
+gradlew*     
+settings.gradle
+build.gradle  
+gradle/   
+gradlew.bat 
+.gradle/
+.idea/

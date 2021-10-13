@@ -1,4 +1,9 @@
+/*
+ * @author: ASIM AHAMMED
+ */
+
 package com.bridgelab;
+
 import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -95,11 +100,11 @@ public class AddressBookMain {
                         break;
                     case 7:
                         System.out.println("Enter new phone number");
-                        info.setPhoneNumber(sc.nextLine());
+                        info.setPhNo(sc.nextLine());
                         break;
                     case 8:
                         System.out.println("Enter new email");
-                        info.setEmail(sc.nextLine());
+                        info.setEmailId(sc.nextLine());
                         break;
                     default:
                         System.out.println("Invalid Entry");

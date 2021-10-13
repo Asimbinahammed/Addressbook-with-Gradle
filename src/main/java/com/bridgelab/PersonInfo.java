@@ -1,5 +1,6 @@
 package com.bridgelab;
-public class Person {
+
+public class PersonInfo {
     public String firstName;
     public String lastName;
     public String address;
@@ -9,7 +10,7 @@ public class Person {
     public String phno;
     public String emailId;
 
-    public Person(String firstName, String lastName, String address, String city, String state, String zip, String phno,
+    public PersonInfo(String firstName, String lastName, String address, String city, String state, String zip, String phno,
                   String emailId) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -91,4 +92,5 @@ public class Person {
                 + ", City : " + city + ", State : " + state + ", Zip : " + zip + ", PhoneNumber : " + phno
                 + ", Email : " + emailId + " ]";
     }
+
 }
